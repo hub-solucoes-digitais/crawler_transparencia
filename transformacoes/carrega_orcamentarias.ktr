@@ -430,7 +430,7 @@
     <created_date>2022/07/22 10:05:59.706</created_date>
     <modified_user>-</modified_user>
     <modified_date>2022/07/22 10:05:59.706</modified_date>
-    <key_for_session_key/>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -500,21 +500,62 @@
   </connection>
   <order>
     <hop>
-      <from>Select values</from>
-      <to>Insere dados na tabela</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Importar CSV</from>
       <to>Get system info</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
+      <from>transforma tipos</from>
+      <to>Insere dados na tabela</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>renomear contas</from>
+      <to>transforma tipos</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
       <from>Get system info</from>
-      <to>Select values</to>
+      <to>Set field value to a constant</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Set field value to a constant</from>
+      <to>renomear contas</to>
       <enabled>Y</enabled>
     </hop>
   </order>
+  <step>
+    <name>Get system info</name>
+    <type>SystemInfo</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>dt_carga</name>
+        <type>system date (variable)</type>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>288</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>Importar CSV</name>
     <type>TextFileInput</type>
@@ -575,7 +616,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>50</length>
+        <length>15</length>
         <precision>0</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -590,7 +631,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>50</length>
+        <length>15</length>
         <precision>0</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -605,7 +646,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>50</length>
+        <length>15</length>
         <precision>0</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -620,7 +661,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>150</length>
+        <length>61</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -635,7 +676,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>50</length>
+        <length>15</length>
         <precision>0</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -650,7 +691,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>50</length>
+        <length>15</length>
         <precision>0</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -665,7 +706,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>50</length>
+        <length>15</length>
         <precision>0</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -680,7 +721,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>50</length>
+        <length>15</length>
         <precision>0</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -695,7 +736,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>10</length>
+        <length>8</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -710,7 +751,97 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>10</length>
+        <length>2</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>nr_ano</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>R$</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>etl_versao</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>R$</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>etl_dt_inicio</name>
+        <type>String</type>
+        <format/>
+        <currency>R$</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>27</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>etl_dt_fim</name>
+        <type>String</type>
+        <format/>
+        <currency>R$</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>27</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>dsc_periodo</name>
+        <type>String</type>
+        <format/>
+        <currency>R$</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>7</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>dsc_unidade</name>
+        <type>String</type>
+        <format/>
+        <currency>R$</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>5</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -750,7 +881,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>256</xloc>
+      <xloc>128</xloc>
       <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
@@ -768,67 +899,67 @@
     </partitioning>
     <connection>dw_dev</connection>
     <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
+    <update_bypassed>Y</update_bypassed>
     <lookup>
-      <schema>dw</schema>
-      <table>transparencia_orcamentaria_new</table>
+      <schema>dbo</schema>
+      <table>contas_orcamentarias_v0</table>
       <key>
-        <name>IDItemTransp</name>
-        <field>IDItemTransp</field>
+        <name>id_item_transp</name>
+        <field>id_item_transp</field>
         <condition>=</condition>
         <name2/>
       </key>
       <key>
-        <name>IDItemTranspSuperior</name>
-        <field>IDItemTranspSuperior</field>
+        <name>id_item_transp_superior</name>
+        <field>id_item_transp_superior</field>
         <condition>=</condition>
         <name2/>
       </key>
       <key>
-        <name>Nivel</name>
-        <field>Nivel</field>
+        <name>nr_hierarquia</name>
+        <field>nr_hierarquia</field>
         <condition>=</condition>
         <name2/>
       </key>
       <key>
-        <name>NMItemTransp</name>
-        <field>NMItemTransp</field>
+        <name>nm_conta</name>
+        <field>nm_conta</field>
         <condition>=</condition>
         <name2/>
       </key>
       <key>
-        <name>ValorEstimada</name>
-        <field>ValorEstimada</field>
+        <name>vl_estimado</name>
+        <field>vl_estimado</field>
         <condition>=</condition>
         <name2/>
       </key>
       <key>
-        <name>ValorRealizada</name>
-        <field>ValorRealizada</field>
+        <name>vl_realizado</name>
+        <field>vl_realizado</field>
         <condition>=</condition>
         <name2/>
       </key>
       <key>
-        <name>ExecPerc</name>
-        <field>ExecPerc</field>
+        <name>vl_executado</name>
+        <field>vl_executado</field>
         <condition>=</condition>
         <name2/>
       </key>
       <key>
-        <name>PesoPerc</name>
-        <field>PesoPerc</field>
+        <name>vl_peso</name>
+        <field>vl_peso</field>
         <condition>=</condition>
         <name2/>
       </key>
       <key>
-        <name>Tipo</name>
-        <field>Tipo</field>
+        <name>dsc_categoria</name>
+        <field>dsc_categoria</field>
         <condition>=</condition>
         <name2/>
       </key>
       <key>
-        <name>Uf</name>
-        <field>Uf</field>
+        <name>dsc_estado</name>
+        <field>dsc_estado</field>
         <condition>=</condition>
         <name2/>
       </key>
@@ -838,59 +969,125 @@
         <condition>=</condition>
         <name2/>
       </key>
+      <key>
+        <name>nr_ano</name>
+        <field>nr_ano</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>etl_versao</name>
+        <field>etl_versao</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>etl_dt_inicio</name>
+        <field>etl_dt_inicio</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>etl_dt_fim</name>
+        <field>etl_dt_fim</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>dsc_periodo</name>
+        <field>dsc_periodo</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>dsc_unidade</name>
+        <field>dsc_unidade</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
       <value>
-        <name>IDItemTransp</name>
-        <rename>IDItemTransp</rename>
+        <name>id_item_transp</name>
+        <rename>id_item_transp</rename>
         <update>N</update>
       </value>
       <value>
-        <name>IDItemTranspSuperior</name>
-        <rename>IDItemTranspSuperior</rename>
+        <name>id_item_transp_superior</name>
+        <rename>id_item_transp_superior</rename>
         <update>N</update>
       </value>
       <value>
-        <name>Nivel</name>
-        <rename>Nivel</rename>
+        <name>nr_hierarquia</name>
+        <rename>nr_hierarquia</rename>
         <update>N</update>
       </value>
       <value>
-        <name>NMItemTransp</name>
-        <rename>NMItemTransp</rename>
+        <name>nm_conta</name>
+        <rename>nm_conta</rename>
         <update>N</update>
       </value>
       <value>
-        <name>ValorEstimada</name>
-        <rename>ValorEstimada</rename>
+        <name>vl_estimado</name>
+        <rename>vl_estimado</rename>
         <update>N</update>
       </value>
       <value>
-        <name>ValorRealizada</name>
-        <rename>ValorRealizada</rename>
+        <name>vl_realizado</name>
+        <rename>vl_realizado</rename>
         <update>N</update>
       </value>
       <value>
-        <name>ExecPerc</name>
-        <rename>ExecPerc</rename>
+        <name>vl_executado</name>
+        <rename>vl_executado</rename>
         <update>N</update>
       </value>
       <value>
-        <name>PesoPerc</name>
-        <rename>PesoPerc</rename>
+        <name>vl_peso</name>
+        <rename>vl_peso</rename>
         <update>N</update>
       </value>
       <value>
-        <name>Tipo</name>
-        <rename>Tipo</rename>
+        <name>dsc_categoria</name>
+        <rename>dsc_categoria</rename>
         <update>N</update>
       </value>
       <value>
-        <name>Uf</name>
-        <rename>Uf</rename>
+        <name>dsc_estado</name>
+        <rename>dsc_estado</rename>
         <update>N</update>
       </value>
       <value>
         <name>dt_carga</name>
         <rename>dt_carga</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>nr_ano</name>
+        <rename>nr_ano</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>etl_versao</name>
+        <rename>etl_versao</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>etl_dt_inicio</name>
+        <rename>etl_dt_inicio</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>etl_dt_fim</name>
+        <rename>etl_dt_fim</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>dsc_periodo</name>
+        <rename>dsc_periodo</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>dsc_unidade</name>
+        <rename>dsc_unidade</rename>
         <update>N</update>
       </value>
     </lookup>
@@ -903,13 +1100,149 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>704</xloc>
+      <xloc>992</xloc>
       <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Select values</name>
+    <name>Set field value to a constant</name>
+    <type>SetValueConstant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <usevar>N</usevar>
+    <fields>
+      <field>
+        <name>etl_dt_fim</name>
+        <value>1900-01-01 00:00:00.000000</value>
+        <mask>yyyy-MM-dd HH:mm:ss.SSS</mask>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>etl_dt_inicio</name>
+        <value>2200-01-01 00:00:00.000000</value>
+        <mask>yyyy-MM-dd HH:mm:ss.SSS</mask>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>464</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>renomear contas</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>IDItemTransp</name>
+        <rename>id_item_transp</rename>
+      </field>
+      <field>
+        <name>IDItemTranspSuperior</name>
+        <rename>id_item_transp_superior</rename>
+      </field>
+      <field>
+        <name>Nivel</name>
+        <rename>nr_hierarquia</rename>
+      </field>
+      <field>
+        <name>NMItemTransp</name>
+        <rename>nm_conta</rename>
+      </field>
+      <field>
+        <name>ValorEstimada</name>
+        <rename>vl_estimado</rename>
+      </field>
+      <field>
+        <name>ValorRealizada</name>
+        <rename>vl_realizado</rename>
+      </field>
+      <field>
+        <name>ExecPerc</name>
+        <rename>vl_executado</rename>
+      </field>
+      <field>
+        <name>PesoPerc</name>
+        <rename>vl_peso</rename>
+      </field>
+      <field>
+        <name>Tipo</name>
+        <rename>dsc_categoria</rename>
+      </field>
+      <field>
+        <name>Uf</name>
+        <rename>dsc_estado</rename>
+      </field>
+      <field>
+        <name>dt_carga</name>
+        <rename/>
+      </field>
+      <field>
+        <name>nr_ano</name>
+        <rename/>
+      </field>
+      <field>
+        <name>etl_versao</name>
+        <rename/>
+      </field>
+      <field>
+        <name>etl_dt_inicio</name>
+        <rename/>
+      </field>
+      <field>
+        <name>etl_dt_fim</name>
+        <rename/>
+      </field>
+      <field>
+        <name>dsc_periodo</name>
+        <rename/>
+      </field>
+      <field>
+        <name>dsc_unidade</name>
+        <rename/>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>672</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>transforma tipos</name>
     <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
@@ -922,8 +1255,8 @@
     <fields>
       <select_unspecified>N</select_unspecified>
       <meta>
-        <name>IDItemTransp</name>
-        <rename>IDItemTransp</rename>
+        <name>id_item_transp</name>
+        <rename>id_item_transp</rename>
         <type>String</type>
         <length>50</length>
         <precision>0</precision>
@@ -939,8 +1272,8 @@
         <storage_type/>
       </meta>
       <meta>
-        <name>IDItemTranspSuperior</name>
-        <rename>IDItemTranspSuperior</rename>
+        <name>id_item_transp_superior</name>
+        <rename>id_item_transp_superior</rename>
         <type>String</type>
         <length>50</length>
         <precision>0</precision>
@@ -956,8 +1289,8 @@
         <storage_type/>
       </meta>
       <meta>
-        <name>Nivel</name>
-        <rename>Nivel</rename>
+        <name>nr_hierarquia</name>
+        <rename>nr_hierarquia</rename>
         <type>String</type>
         <length>50</length>
         <precision>0</precision>
@@ -973,8 +1306,8 @@
         <storage_type/>
       </meta>
       <meta>
-        <name>NMItemTransp</name>
-        <rename>NMItemTransp</rename>
+        <name>nm_conta</name>
+        <rename>nm_conta</rename>
         <type>String</type>
         <length>150</length>
         <precision>-2</precision>
@@ -990,8 +1323,8 @@
         <storage_type/>
       </meta>
       <meta>
-        <name>ValorEstimada</name>
-        <rename>ValorEstimada</rename>
+        <name>vl_estimado</name>
+        <rename>vl_estimado</rename>
         <type>Number</type>
         <length>20</length>
         <precision>2</precision>
@@ -1007,8 +1340,8 @@
         <storage_type/>
       </meta>
       <meta>
-        <name>ValorRealizada</name>
-        <rename>ValorRealizada</rename>
+        <name>vl_realizado</name>
+        <rename>vl_realizado</rename>
         <type>Number</type>
         <length>20</length>
         <precision>2</precision>
@@ -1024,8 +1357,8 @@
         <storage_type/>
       </meta>
       <meta>
-        <name>ExecPerc</name>
-        <rename>ExecPerc</rename>
+        <name>vl_peso</name>
+        <rename>vl_peso</rename>
         <type>Number</type>
         <length>20</length>
         <precision>2</precision>
@@ -1041,8 +1374,8 @@
         <storage_type/>
       </meta>
       <meta>
-        <name>PesoPerc</name>
-        <rename>PesoPerc</rename>
+        <name>vl_executado</name>
+        <rename>vl_executado</rename>
         <type>Number</type>
         <length>20</length>
         <precision>2</precision>
@@ -1058,8 +1391,8 @@
         <storage_type/>
       </meta>
       <meta>
-        <name>Tipo</name>
-        <rename>Tipo</rename>
+        <name>dsc_categoria</name>
+        <rename>dsc_categoria</rename>
         <type>String</type>
         <length>10</length>
         <precision>-2</precision>
@@ -1075,8 +1408,8 @@
         <storage_type/>
       </meta>
       <meta>
-        <name>Uf</name>
-        <rename>Uf</rename>
+        <name>dsc_estado</name>
+        <rename>dsc_estado</rename>
         <type>String</type>
         <length>10</length>
         <precision>-2</precision>
@@ -1094,7 +1427,41 @@
       <meta>
         <name>dt_carga</name>
         <rename>dt_carga</rename>
-        <type>None</type>
+        <type>Timestamp</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>etl_dt_fim</name>
+        <rename>etl_dt_fim</rename>
+        <type>Timestamp</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>etl_dt_inicio</name>
+        <rename>etl_dt_inicio</rename>
+        <type>Timestamp</type>
         <length>-2</length>
         <precision>-2</precision>
         <conversion_mask/>
@@ -1118,38 +1485,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>544</xloc>
-      <yloc>224</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Get system info</name>
-    <type>SystemInfo</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>dt_carga</name>
-        <type>system date (variable)</type>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>400</xloc>
+      <xloc>832</xloc>
       <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
