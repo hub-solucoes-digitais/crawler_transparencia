@@ -7,43 +7,33 @@ mes_consulta = date.today().month
 
 def define_periodo(mes_consulta):
     if (mes_consulta == 1):
-        periodo = "Jan-Dez"
-        ano = str(date.today().year-1)
-    elif (mes_consulta == 2):
         periodo = "Janeiro"
-        ano = str(date.today().year)
-    elif (mes_consulta == 3):
+    elif (mes_consulta == 2):
         periodo = "Jan-Fev"
-        ano = str(date.today().year)
-    elif (mes_consulta == 4):
+    elif (mes_consulta == 3):
         periodo = "Jan-Mar"
-        ano = str(date.today().year)
-    elif (mes_consulta == 5):
+    elif (mes_consulta == 4):
         periodo = "Jan-Abr"
-        ano = str(date.today().year)
-    elif (mes_consulta == 6):
+    elif (mes_consulta == 5):
         periodo = "Jan-Mai"
-        ano = str(date.today().year)
-    elif (mes_consulta == 7):
+    elif (mes_consulta == 6):
         periodo = "Jan-Jun"
-        ano = str(date.today().year)
-    elif (mes_consulta == 8):
+    elif (mes_consulta == 7):
         periodo = "Jan-Jul"
-        ano = str(date.today().year)
-    elif (mes_consulta == 9):
+    elif (mes_consulta == 8):
         periodo = "Jan-Ago"
-        ano = str(date.today().year)
-    elif (mes_consulta == 10):
+    elif (mes_consulta == 9):
         periodo = "Jan-Set"
-        ano = str(date.today().year)
-    elif (mes_consulta == 11):
+    elif (mes_consulta == 10):
         periodo = "Jan-Out"
-        ano = str(date.today().year)
-    elif (mes_consulta == 12):
+    elif (mes_consulta == 11):
         periodo = "Jan-Nov"
-        ano = str(date.today().year)
+    elif (mes_consulta == 12):
+        periodo = "Jan-Dez"
+    else:
+        periodo = "Não informado"
         
-    return periodo,ano
+    return periodo
 
 def move_arquivos(fonte, destino):
     source = f'./{fonte}'

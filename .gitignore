@@ -2,3 +2,5 @@
 .env
 *.csv
 *.txt
+venv/
+teste.py
