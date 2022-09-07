@@ -1,10 +1,22 @@
+from datetime import date, datetime
 from pandas import json_normalize
 from utils import define_periodo
 from utils import move_arquivos
-from datetime import date, datetime
+from dotenv import load_dotenv
+import sqlalchemy as sa
 import pandas as pd
 import requests
 import json
+import os
+
+load_dotenv()
+
+DB_USER = os.getenv("DB_USER")
+DB_PASS = os.getenv("DB_PASS")
+DB_HOST = os.getenv("DB_HOST")
+DB_NAME = os.getenv("DB_NAME")
+
+engine = sa.create_engine(f'mssql+pyodbc://{DB_USER}:{DB_PASS}@{DB_HOST}/{DB_NAME}?driver=SQL+Server+Native+Client+11.0')
 
 fonte = "csv"
 destino = "log\old_csv"
@@ -49,6 +61,7 @@ for ENTIDADE in ENTIDADES_LIST:
             df["dsc_unidade"] = ENTIDADE.upper()
             path = f'csv/df_{UF}_{ENTIDADE}_{DATA_CONSULTA}.csv'
             df.to_csv(path, index=False)
+            df.to_sql('teste_contas_orcamentarias', con=engine, if_exists='append')
             
             with open(f"log/arquivo_log_{DATA_CONSULTA}.txt", "a", encoding="utf-8") as arquivo_log:
                 arquivo_log.write(f"Status: Sucesso, Entidade: {ENTIDADE}, UF: {UF}, Data Consulta: {DATA_CONSULTA}, Caminho Arquivo: {path}\n")

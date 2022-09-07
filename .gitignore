@@ -4,3 +4,6 @@
 *.txt
 venv/
 teste.py
+sqltools_20220907070204_23832.log
+teste.sql
+local_conn/local_conn.sqlproj
